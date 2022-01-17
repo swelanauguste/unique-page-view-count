@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+
+{% block head_title %}
+Post List
+{% endblock head_title %}
+
+{% block content %}
+<div class="container py-5">
+    <h1>Posts</h1>
+    <div class="my-3 text-end">
+        <a class="btn btn-outline-dark rounded-pill px-5"
+            href="{% url 'post-create' %}">Add</a>
+    </div>
+    <ul>
+        {% for obj in object_list %}
+        <li class="d-flex">
+           {{obj.post_name}}
+            <form action="{{ obj.get_absolute_url }}"
+                method="get">
+                <input type="hidden"
+                    name="post-slug"
+                    value="{{ obj.slug }}">
+                <input type="submit"
+                    value="View">
+            </form>
+            </p>
+        </li>
+
+        {% empty %}
+        <p class="mx-auto">No Posts</p>
+        {% endfor %}
+
+    </ul>
+</div>
+{% endblock content %}

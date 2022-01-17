@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% load widget_tweaks %}
+
+{% block head_title %}
+New
+{% endblock head_title %}
+
+
+
+{% block content %}
+<div class="container my-5">
+    <div class="my-3">
+    <a class="px-5 btn btn-outline-dark rounded-pill" href="/">Home</a>
+</div>
+    <h1>New</h1>
+    <div class="card col-lg-4 col-sm-12 col-md-6 mx-auto">
+        <div class="card-header">New post form</div>
+        <div class="card-body">
+            <form action=""
+                method="post">
+                {% csrf_token %}
+                {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+                {% endfor %}
+
+                <div class="form-group">
+                    <label for="">
+                        {% render_field form.post_name.label %}</label>
+                    {% render_field form.post_name class="form-control" %}
+                    <br>
+                    <label for="">
+                        {% render_field form.post_content.label %}</label>
+                    {% render_field form.post_content class="form-control" %}
+                    {% for error in field.errors %}
+                    <span class="help-block">{{ error }}</span>
+                </div>
+                {% endfor %}
+                <div class="text-end">
+                    <button class="btn btn-outline-dark rounded-pill my-3 px-5"
+                        type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}
